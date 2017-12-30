@@ -1,0 +1,70 @@
+<!--
+                                     .;$$
+                        ....:;$$$$$$$   $
+                    ..;;;$$$            $:..
+                 .:$$$$$$               $$$$$:.
+               .;$$$$$$$3             $$$$$$$$$;.
+             .;$$$$$$$$$$      $$$$$$$;$$$$$$$$$$;.
+            ;$$$$$$$$$$$$$    $$;$$$$$$$$$$$$$$$$$$;
+           ;$$$$$$$$$$$$$$$$    $$$$$$$$$$$$$$$$$$$$$
+          $$$$$$$$$$$$$$$$$$$    $$$$$$$$$$$$$$$$$$$$$
+         :$$$$$$$$$$$$$$$$$$$$    $$$$$$$$$$$$$$$$$$$$;
+        .$$$$$$$$$$$$$$$$$$$$$$$   $$$$$$$$$$$$$$$$$$$$.
+        :$$$$$$$$$$$$$$$$$$$$$$$$   $$$$$$$$$$$$$$$$$$$:
+        ;$$$$$$$$$$$$$$$$$$$$$$$$$$  $$$$$$$$$$$$$$$$$$;
+        ;$$$$$$$$$$$$$$$$$$$$$$$$$$$   $$$$$$$$$$$$$$$$;
+        :$$$$$$$$$$$$$$$$$$             $$$$$$$$$$$$$$$:
+        .$$$$$$$$$$$$$$$                 $$$$$$$$$$$$$$.
+         ;$$$$$$$$$$$$$                   $$$$$$$$$$$$;
+          $$$$$$$$$$$$                     $$$$$$$$$$$
+           $$$$$$$$$$                      $$$$$$$$$$
+            ;$$$$$$$$                     $$$$$$$$$;
+             .$$$$$$$$                   $$$$$$$$$.
+               .$$$$$$$$               $$$$$$$$$:
+                 .;$$$$$$$$          $$$$$$$$;.
+                    .:$$$$$$$$$$$$$$$$$$$$:.
+                        ...:;;;;;;;;:...
+
+                         前端: Nan Yang
+-->
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>QQ 音乐</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <header id="header">
+        <img id="logo" src="./images/logo.png" alt="logo">
+    </header>
+    <nav class="nav">
+        <a href="#" data-tab=".rec-tab" class="active">推荐</a>
+        <a href="#" data-tab=".rank-tab">排行榜</a>
+        <a href="#" data-tab=".search-tab">搜索</a>
+    </nav>
+    <div class="content">
+        <div class="rec-tab active">
+            <div id="slide"></div>
+            <div class="radio-list">
+                <h2 class="title">电台</h2>
+                <ul class="list-ct"></ul>
+            </div>
+            <div class="songs-list">
+                <h2 class="title">热门歌单</h2>
+                <ul class="list-ct"></ul>
+            </div>
+        </div>
+        <div class="rank-tab">rank</div>
+        <div class="search-tab">search</div>
+    </div>
+
+    <script src="scripts/lazyload.js"></script>
+    <script src="scripts/tab.js"></script>
+    <script src="scripts/slide.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>

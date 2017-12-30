@@ -1,0 +1,16 @@
+#slide {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 14px;
+  .slide-wrap {
+    display: flex;
+    .slide-item {
+      > a {
+        display: block;
+        > img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@import "reset";
+@import "rec";
+@import "var";
+@import "header";
+@import "slide";
+@import "nav";
+@import "content";
+body {
+  background: $body-bg;
+}
