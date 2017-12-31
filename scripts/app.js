@@ -1,16 +1,25 @@
 !function () {
-    fetch('./json/rec.json')
+    fetch('http://104.236.134.72:4001/')
         .then(res => res.json())
-        .then(render)
+        .then(renderRec)
 
-    function render(json) {
-        reanderSlide(json.data.slider);
-        renderRadios(json.data.radioList);
-        renderSongs(json.data.songList);
+    fetch('http://104.236.134.72:4001/toplist')
+        .then(res => res.json())
+        .then(renderRank)
+
+    function renderRec(recJson) {
+        renderSlide(recJson.data.slider);
+        renderRadios(recJson.data.radioList);
+        renderSongs(recJson.data.songList);
         lazyload(document.querySelectorAll('.lazyload'));
     }
 
-    function reanderSlide(slides) {
+    function renderRank(rankJson) {
+        renderToplist(rankJson.data.topList)
+        lazyload(document.querySelectorAll('.lazyload'));
+    }
+
+    function renderSlide(slides) {
         let slide = slides.map(slide => {
             return {link: slide.linkUrl, image: slide.picUrl}
         })
@@ -51,6 +60,31 @@
                  </a>
             </li>`).join('');
     }
+
+    function renderToplist(topList) {
+        document.querySelector('.rank-tab ul').innerHTML = topList.map(topic =>
+            `<li class="topic-item" data-id="${topic.id}" data-type="${topic.type}">
+                   <div class="topic-main">
+                        <a href="javascript:;" class="topic-media">
+                            <img class="lazyload" data-src="${topic.picUrl}">
+                            <span class="listen-count"><i class="icon icon_listen"></i>${(topic.listenCount / 10000).toFixed(1)}万</span>
+                        </a>
+                        <div class="topic-info">
+                            <div class="topic-cont">
+                                <h3 class="topic-tit">${topic.topTitle}</h3>
+                                ${songsList(topic.songList)}
+                            </div>
+                            <i class="topic-arrow"></i>
+                        </div>
+                    </div>
+             </li>`).join('');
+    }
+    function songsList(songs) {
+        return songs.map((song, i)=>
+            `<p>${i+1}<span class="text-name">${song.songname}</span>- ${song.singername}</p>
+            `).join('');
+    }
+
 }()
 
 

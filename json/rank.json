@@ -1,0 +1,304 @@
+{
+  "code": 0,
+  "subcode": 0,
+  "message": "",
+  "default": 0,
+  "data": {
+    "topList": [
+      {
+        "id": 4,
+        "listenCount": 19700000,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_4_300_212656017.jpg",
+        "songList": [
+          {
+            "singername": "吴亦凡/赵丽颖",
+            "songname": "想你"
+          },
+          {
+            "singername": "毛不易",
+            "songname": "无问"
+          },
+          {
+            "singername": "张杰/LOKEY低调组合",
+            "songname": "FAST"
+          }
+        ],
+        "topTitle": "安利XS·巅峰榜·流行指数",
+        "type": 0
+      },
+      {
+        "id": 26,
+        "listenCount": 19600000,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_26_300_212623641.jpg",
+        "songList": [
+          {
+            "singername": "薛之谦",
+            "songname": "狐狸"
+          },
+          {
+            "singername": "金志文",
+            "songname": "远走高飞 (独唱版)"
+          },
+          {
+            "singername": "吴亦凡/赵丽颖",
+            "songname": "想你"
+          }
+        ],
+        "topTitle": "巅峰榜·热歌",
+        "type": 0
+      },
+      {
+        "id": 27,
+        "listenCount": 15234910,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_27_300_212656017.jpg",
+        "songList": [
+          {
+            "singername": "吴亦凡/赵丽颖",
+            "songname": "想你"
+          },
+          {
+            "singername": "张杰/LOKEY低调组合",
+            "songname": "FAST"
+          },
+          {
+            "singername": "毛不易",
+            "songname": "无问"
+          }
+        ],
+        "topTitle": "巅峰榜·新歌",
+        "type": 0
+      },
+      {
+        "id": 30,
+        "listenCount": 9500000,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_30_300_212634056.jpg",
+        "songList": [
+          {
+            "singername": "庾澄庆",
+            "songname": "告白气球 (Live)"
+          },
+          {
+            "singername": "张靓颖",
+            "songname": "时间都去哪儿了 (Live)"
+          },
+          {
+            "singername": "林忆莲",
+            "songname": "红色高跟鞋 (Live)"
+          }
+        ],
+        "topTitle": "巅峰榜·梦想的声音",
+        "type": 0
+      },
+      {
+        "id": 28,
+        "listenCount": 19500000,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_28_300_212437019.jpg",
+        "songList": [
+          {
+            "singername": "胡66",
+            "songname": "空空如也"
+          },
+          {
+            "singername": "陈小希",
+            "songname": "柒个我"
+          },
+          {
+            "singername": "广东雨神",
+            "songname": "广东爱情故事"
+          }
+        ],
+        "topTitle": "巅峰榜·网络歌曲",
+        "type": 0
+      },
+      {
+        "id": 5,
+        "listenCount": 6454680,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_5_300_212623641.jpg",
+        "songList": [
+          {
+            "singername": "薛之谦",
+            "songname": "狐狸"
+          },
+          {
+            "singername": "吴亦凡/赵丽颖",
+            "songname": "想你"
+          },
+          {
+            "singername": "张艺兴",
+            "songname": "圣诞又至 (Goodbye Christmas)"
+          }
+        ],
+        "topTitle": "巅峰榜·内地",
+        "type": 0
+      },
+      {
+        "id": 6,
+        "listenCount": 5194120,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_6_300_109181039.jpg",
+        "songList": [
+          {
+            "singername": "王力宏/谭维维",
+            "songname": "缘分一道桥"
+          },
+          {
+            "singername": "徐佳莹",
+            "songname": "灰色"
+          },
+          {
+            "singername": "张信哲",
+            "songname": "叙述"
+          }
+        ],
+        "topTitle": "巅峰榜·港台",
+        "type": 0
+      },
+      {
+        "id": 3,
+        "listenCount": 14160750,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_3_300_212582070.jpg",
+        "songList": [
+          {
+            "singername": "Imagine Dragons/Khalid",
+            "songname": "Thunder / Young Dumb & Broke (Medley)"
+          },
+          {
+            "singername": "Kesha",
+            "songname": "This Is Me"
+          },
+          {
+            "singername": "Lenka",
+            "songname": "We Are The Brave"
+          }
+        ],
+        "topTitle": "巅峰榜·欧美",
+        "type": 0
+      },
+      {
+        "id": 16,
+        "listenCount": 8316940,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_16_300_212602996.jpg",
+        "songList": [
+          {
+            "singername": "크러쉬 (Crush)",
+            "songname": "내 편이 돼줘(be by my side) (站在我身边吧)"
+          },
+          {
+            "singername": "TWICE (트와이스)",
+            "songname": "Merry & Happy"
+          },
+          {
+            "singername": "딘 (DEAN)",
+            "songname": "instagram"
+          }
+        ],
+        "topTitle": "巅峰榜·韩国",
+        "type": 0
+      },
+      {
+        "id": 29,
+        "listenCount": 3158320,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_29_300_212623641.jpg",
+        "songList": [
+          {
+            "singername": "薛之谦",
+            "songname": "狐狸"
+          },
+          {
+            "singername": "毛不易",
+            "songname": "无问"
+          },
+          {
+            "singername": "冯提莫",
+            "songname": "再见前任"
+          }
+        ],
+        "topTitle": "巅峰榜·影视金曲",
+        "type": 0
+      },
+      {
+        "id": 17,
+        "listenCount": 1990000,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_17_300_212122798.jpg",
+        "songList": [
+          {
+            "singername": "初音ミク (初音未来)",
+            "songname": "Shining Star"
+          },
+          {
+            "singername": "赤西仁 (Jin Akanishi)",
+            "songname": "Blessèd"
+          },
+          {
+            "singername": "椎名林檎 (しいな りんご)",
+            "songname": "人生は夢だらけ (人生处处是美梦)"
+          }
+        ],
+        "topTitle": "巅峰榜·日本",
+        "type": 0
+      },
+      {
+        "id": 201,
+        "listenCount": 315060,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/20150127163830.jpg",
+        "songList": [
+          {
+            "singername": "吴亦凡",
+            "songname": "想你"
+          },
+          {
+            "singername": "高颖",
+            "songname": "枷锁"
+          },
+          {
+            "singername": "TFBOYS",
+            "songname": "我们的时光"
+          }
+        ],
+        "topTitle": "巅峰榜·MV",
+        "type": 0
+      },
+      {
+        "id": 52,
+        "listenCount": 1498149,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_52_300_212053942.jpg",
+        "songList": [
+          {
+            "singername": "KiKi富妍",
+            "songname": "白夜行"
+          },
+          {
+            "singername": "过又嘉",
+            "songname": "独特"
+          },
+          {
+            "singername": "余佳运/Panta.Q",
+            "songname": "MATILDA"
+          }
+        ],
+        "topTitle": "巅峰榜·腾讯音乐人原创榜",
+        "type": 0
+      },
+      {
+        "id": 36,
+        "listenCount": 3131760,
+        "picUrl": "http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_36_300_200525765.jpg",
+        "songList": [
+          {
+            "singername": "苏悦宁",
+            "songname": "红色高跟鞋"
+          },
+          {
+            "singername": "陈诗思",
+            "songname": "我好想你"
+          },
+          {
+            "singername": "胡慧",
+            "songname": "分手快乐"
+          }
+        ],
+        "topTitle": "巅峰榜·K歌金曲",
+        "type": 0
+      }
+    ]
+  }
+}
