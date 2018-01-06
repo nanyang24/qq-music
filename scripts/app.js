@@ -12,6 +12,7 @@
         renderRadios(recJson.data.radioList);
         renderSongs(recJson.data.songList);
         lazyload(document.querySelectorAll('.lazyload'));
+        renderfooter(document.querySelector('.rec-tab'))
     }
 
     function renderRank(rankJson) {
@@ -24,10 +25,12 @@
             return {link: slide.linkUrl, image: slide.picUrl}
         })
         new Slide({
-            el: document.querySelector('#slide'),
+            el: document.querySelector('.swiper-container'),
             slide
         })
     }
+
+    let search = new Search(document.querySelector('.search-tab'))
 
     function renderRadios(radioList) {
         document.querySelector('.content .rec-tab .radio-list .list-ct').innerHTML = radioList.map(radio =>
@@ -79,12 +82,29 @@
                     </div>
              </li>`).join('');
     }
+
     function songsList(songs) {
-        return songs.map((song, i)=>
-            `<p>${i+1}<span class="text-name">${song.songname}</span>- ${song.singername}</p>
+        return songs.map((song, i) =>
+            `<p>${i + 1}<span class="text-name">${song.songname}</span>- ${song.singername}</p>
             `).join('');
     }
 
+
+    function renderfooter(node) {
+        let footer = document.createElement('div');
+        footer.classList.add('footer');
+        footer.innerHTML =
+            `<div class="web-vision">
+                <a href="http://y.qq.com/?ADTAG=myqq&nomobile=1#type=index">查看电脑版网页</a>
+            </div>
+             <div class="footer-logo"></div>
+                <div class="copyright">
+                    <p>Copyright © 1998 - 2018 NanYang. All Rights Reserved.</p>
+                    <a href="mailto:nanyang24@hotmail.com" class="e-link">联系邮箱: nanyang24@hotmail.com</a>
+                </div>
+             </div>`;
+        node.appendChild(footer);
+    }
 }()
 
 

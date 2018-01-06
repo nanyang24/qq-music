@@ -36,6 +36,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>QQ 音乐</title>
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
 </head>
 <body>
     <header id="header">
@@ -47,8 +48,8 @@
         <a href="javascript:;" data-tab=".search-tab">搜索</a>
     </nav>
     <div class="content">
-        <div class="rec-tab active">
-            <div id="slide"></div>
+        <div class="rec-tab ">
+            <div class="swiper-container"></div>
             <div class="radio-list">
                 <h2 class="title">电台</h2>
                 <ul class="list-ct"></ul>
@@ -58,13 +59,47 @@
                 <ul class="list-ct"></ul>
             </div>
         </div>
-        <div class="rank-tab "><ul></ul></div>
-        <div class="search-tab">search</div>
+        <div class="rank-tab ">
+            <ul></ul>
+        </div>
+        <div class="search-tab active">
+            <div class="search-bar">
+                <div class="search-wrap">
+                    <form action="#" class="search-form" autocomplete="off">
+                        <input type="text" class="search-input" id="search-input" placeholder="搜索歌曲、歌单、专辑">
+                        <i class="iconfont icon-search"></i>
+                        <i class="icon_delete"></i>
+                    </form>
+                </div>
+                <div class="cancel-btn">取消</div>
+            </div>
+            <div class="search-result">
+                <h3 class="result-title">热门搜索</h3>
+                <div class="result-tags"></div>
+            </div>
+            <div class="focus-wrapper">
+                <div id="record-keys" class="search-record"></div>
+                <div id="search_result" class="mod_search_content">
+                    <ul class="search_content"></ul>
+                    <div class="search-null">
+                        <h6>无匹配</h6>
+                        <p>很抱歉，没有找到与“@”相关的结果。</p>
+                    </div>
+                </div>
+                <div id="loading" class="mod_loading">
+                    <i class="loading__icon"></i>
+                    <span class="loading__text">正在载入更多...</span>
+                </div>
+            </div>
+            <p id="load-complete" class="load-complete">已加载全部</p>
+        </div>
     </div>
-
+    <script src="scripts/swiper.min.js"></script>
     <script src="scripts/lazyload.js"></script>
     <script src="scripts/tab.js"></script>
     <script src="scripts/slide.js"></script>
+    <script src="scripts/search.js "></script>
     <script src="scripts/app.js"></script>
+
 </body>
 </html>

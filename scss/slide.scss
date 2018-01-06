@@ -1,16 +1,17 @@
-#slide {
+.swiper-container {
   width: 100%;
-  overflow: hidden;
-  margin-bottom: 14px;
-  .slide-wrap {
-    display: flex;
-    .slide-item {
-      > a {
-        display: block;
-        > img {
-          width: 100%;
-        }
-      }
+  .swiper-pagination {
+    .swiper-pagination-bullet {
+      width: 6px;
+      height: 6px;
+      display: inline-block;
+      border-radius: 100%;
+      background: #000;
+      opacity: .2;
+    }
+    .swiper-pagination-bullet-active {
+      opacity: 1;
+      background: #fff;
     }
   }
 }
