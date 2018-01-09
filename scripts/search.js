@@ -1,17 +1,17 @@
 class Search {
     constructor(el) {
         this.$el = el;
-        this.keyword = '';
-        this.page = 1;
+        this.keyword = '';  // 输入搜索的值
+        this.page = 1;      // 默认页数为1
         this.songs = [];
-        this.fetching = false;
-        this.noMore = false;
+        this.fetching = false;  // 正在 fetch
+        this.noMore = false;    // 是否没有更多数据
 
         this.$input = this.$el.querySelector('#search-input');
-        this.$cancelBtn = this.$el.querySelector('.cancel-btn');
-        this.$delBtn = this.$el.querySelector('.icon_delete');
-        this.$songsList = this.$el.querySelector('.search_content');
-        this.$record = this.$el.querySelector('.search-record')
+        this.$cancelBtn = this.$el.querySelector('.cancel-btn');    // 取消
+        this.$delBtn = this.$el.querySelector('.icon_delete');      // 删除
+        this.$songsList = this.$el.querySelector('.search_content');// 搜索显示的歌曲列表
+        this.$record = this.$el.querySelector('.search-record')     // 搜索历史
 
         this.$input.addEventListener('keyup', this.enter.bind(this));   // 绑定this，才能在 enter 执行 this.search
         this.$input.addEventListener('focus', this.onFocus.bind(this));
@@ -29,6 +29,12 @@ class Search {
         // 初始化 localStorage，如果之前的LS存在就加载，否则新建一个数组
     }
 
+    /**
+     * @description enter 事件
+     * @param {any} event
+     * @returns
+     * @memberof Search
+     */
     enter(event) {
         let keyword = event.target.value.trim();
         this.changeDelicon();
@@ -39,6 +45,10 @@ class Search {
         this.search(keyword);
     }
 
+    /**
+     * @description 重置
+     * @memberof Search
+     */
     reset() {
         this.keyword = '';
         this.songs = [];
@@ -49,6 +59,12 @@ class Search {
         this.hide(document.querySelector('.search-tab .focus-wrapper #search_result .search-null'))
     }
 
+    /**
+     * @description 搜索
+     * @param {any} keyword 用户输入的数据
+     * @param {any} page 页数
+     * @memberof Search
+     */
     search(keyword, page) {
         this.hide(this.$el.querySelector('.search-record'));
         if (keyword === '') return
@@ -78,6 +94,11 @@ class Search {
             });
     }
 
+    /**
+     * @description 渲染 搜索结果的特殊条目，歌手 或者 专辑
+     * @param {any} zhida QQ音乐api定义的名称
+     * @memberof Search
+     */
     renderSinger(zhida) {
         let type = zhida.type;
         let imgUrl;
@@ -96,7 +117,7 @@ class Search {
             imgUrl = zhida.albummid;
             return `
             <li data-albummid=${imgUrl}>
-                <span class="media cover">
+                <span class="media">
                     <img src="https://y.gtimg.cn/music/photo_new/T002R68x68M000${imgUrl}.jpg?max_age=2592000" alt="The Album">
                 </span>
                 <h6 class="main_tit">${zhida.albumname}</h6>
@@ -106,6 +127,11 @@ class Search {
         }
     }
 
+    /**
+     * @description 渲染 搜索结果列表 到页面，调用了renderSinger
+     * @param {any} data 结果数据
+     * @memberof Search
+     */
     renderResult(data) {
         let topHtml;
         let zhida = data.zhida;
@@ -121,12 +147,21 @@ class Search {
         // this.$songsList.insertAdjacentHTML('beforend', html);
     }
 
+    /**
+     * @description 获取 HotKey 数据
+     * @memberof Search
+     */
     getHotkey() {
         fetch('https://qq-music-api.now.sh/hotkey')
             .then(res => res.json())
             .then(json => this.renderHotkey(json.data))
     }
 
+    /**
+     * @description 渲染 Hotkey 数据 到页面
+     * @param {any} data 结果数据
+     * @memberof Search
+     */
     renderHotkey(data) {
         let specialHtml = `<a href="${data.special_url}" class="tag_s tag_hot">${data.special_key}</a>`;
         let hotkey = data.hotkey;
@@ -139,7 +174,11 @@ class Search {
         this.$el.querySelector('.result-tags').innerHTML = specialHtml + html
     }
 
-
+    /**
+     * @description 点击 搜索历史列表的事件，根据matches，判断点击的元素，执行不同的函数
+     * @param {any} event 具体点击的事件
+     * @memberof Search
+     */
     clickRecord(event) {
         let target = event.target;
         if (target.matches('.icon_close')) {        // matches 如果元素被指定的选择器字符串选择，Element.matches()  方法返回true; 否则返回false。
@@ -158,6 +197,10 @@ class Search {
         }
     }
 
+    /**
+     * @description 渲染 搜索历史记录列表 到页面，数据来自于 localStorage
+     * @memberof Search
+     */
     renderRecord() {
         this.$record.innerHTML = ''
         if (!localStorage[this.HISTORY_KEY]) return;
@@ -176,25 +219,45 @@ class Search {
         this.$record.innerHTML = html + clearHtml;
     }
 
+    /**
+     * @description 删除 单独历史记录条目
+     * @param {any} keyword 关键字
+     * @memberof Search
+     */
     deleteRecord(keyword) {
         let index = this.searchRecord.indexOf(keyword);
         this.searchRecord.splice(index, 1);     // 删除
         localStorage.setItem(this.HISTORY_KEY, this.searchRecord);
     }
 
+    /**
+     * @description 添加 单独历史记录条目
+     * @param {any} keyword 关键字
+     * @memberof Search
+     */
     addRecord(keyword) {
         this.searchRecord.push(keyword);
         localStorage.setItem(this.HISTORY_KEY, this.searchRecord);
     }
 
+    /**
+     * @description 滚动事件
+     * @param {any} event
+     * @memberof Search
+     */
     onScroll(event) {
         if (this.noMore) return window.removeEventListener('scroll', this.throttle(this.onScroll.bind(this), 300));
-        console.log(this.fetching);
         if (document.documentElement.clientHeight + pageYOffset > document.body.offsetHeight - 50 && this.$el.querySelector('.search-record').style.display === 'none') {
             this.search(this.keyword, this.page + 1);
         }
     }
 
+    /**
+     * @description 节流函数
+     * @param {any} func 要节流的函数
+     * @param {any} wait 间隔的时间
+     * @memberof Search
+     */
     throttle(func, wait) {     // 节流
         let pre, timer;
         return function fn() {
@@ -210,6 +273,11 @@ class Search {
         }
     }
 
+    /**
+     * @description 根据是否在请求中，设置相应的改变
+     * @param {any} flag 一个布尔值
+     * @memberof Search
+     */
     loadFlag(flag) {
         if (flag) {
             this.fetching = true;
@@ -220,6 +288,10 @@ class Search {
         }
     }
 
+    /**
+     * @description input 聚焦事件
+     * @memberof Search
+     */
     onFocus() {
         this.hide(document.querySelector('.search-result'));
         this.show(document.querySelector('.cancel-btn'));
@@ -230,6 +302,10 @@ class Search {
         this.renderRecord();
     }
 
+    /**
+     * @description 点击取消按钮
+     * @memberof Search
+     */
     ClickCancelBtn() {
         this.show(document.querySelector('.search-result'));
         this.hide(document.querySelector('.cancel-btn'));
@@ -239,18 +315,26 @@ class Search {
         this.$input.value = '';
     }
 
+    /**
+     * @description 根据input值得数量显示可删除按钮
+     * @memberof Search
+     */
     changeDelicon() {
-        console.log(1)
         this.$input.value.length === 0 ? this.hide(document.querySelector('.icon_delete')) :
             this.show(document.querySelector('.icon_delete'))
     }
 
-    hide(element) {
-        element.style.display = 'none';
-    }
-
+    /**
+     * @description 显示和隐藏函数
+     * @param {any} element
+     * @memberof Search
+     */
     show(element) {
         element.style.display = 'block';
+    }
+
+    hide(element) {
+        element.style.display = 'none';
     }
 }
 
