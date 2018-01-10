@@ -31,9 +31,33 @@
     }
 
     let search = new Search(document.querySelector('.search-tab'))
+    let player = new MusicPlayer(document.querySelector('#player'))
+    document.querySelector('#show_player').addEventListener('click',() => {
+        player.show();
+    })
+
+    onHashChange();
+
+    addEventListener('hashchange', onHashChange);
+
+    function onHashChange() {
+        let hash = location.hash
+        if (/#player\?.+/.test(hash)) {
+            let matches = hash.slice(hash.indexOf('?') + 1).match(/(\w+)=([^&]+)/g)
+            let options = matches && matches.reduce((res, cur) => {
+                let arr = cur.split('=')
+                res[arr[0]] = decodeURIComponent(arr[1])
+                return res
+            }, {})
+            // console.log(options);
+            player.play(options);
+        } else {
+            player.hide();
+        }
+    }
 
     function renderRadios(radioList) {
-        document.querySelector('.content .rec-tab .radio-list .list-ct').innerHTML = radioList.map(radio =>
+        document.querySelector('#content .rec-tab .radio-list .list-ct').innerHTML = radioList.map(radio =>
             `<li class="list-item">
                  <a class="main-wrap" href="javascript:;">
                      <div class="media-list">
@@ -48,7 +72,7 @@
     }
 
     function renderSongs(songList) {
-        document.querySelector('.content .rec-tab .songs-list .list-ct').innerHTML = songList.map(song =>
+        document.querySelector('#content .rec-tab .songs-list .list-ct').innerHTML = songList.map(song =>
             `<li class="list-item">
                  <a class="main-wrap" href="javascript:;">
                      <div class="media-list">

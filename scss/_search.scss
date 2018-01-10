@@ -180,7 +180,8 @@
       }
     }
     #search_result {
-      .search_content li {
+      .search_content a {
+        display: block;
         position: relative;
         height: 55px;
         padding-left: 56px;

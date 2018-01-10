@@ -105,24 +105,24 @@ class Search {
         if (type === 2) {
             imgUrl = zhida.singermid;
             return `
-            <li data-singermid="${imgUrl}">
+            <a data-singermid="${imgUrl}">
                 <span class="media avatar">
                     <img src="https://y.gtimg.cn/music/photo_new/T001R68x68M000${imgUrl}.jpg?max_age=2592000" alt="${zhida.singername}">
                 </span>
                 <h6 class="main_tit">${zhida.singername}</h6>
                 <p class="sub_tit"><span>单曲：${zhida.songnum}</span><span> 专辑：${zhida.albumnum}</span></p>
-            </li>
+            </a>
             `
         } else if (type === 3) {
             imgUrl = zhida.albummid;
             return `
-            <li data-albummid=${imgUrl}>
+            <a data-albummid=${imgUrl}>
                 <span class="media">
                     <img src="https://y.gtimg.cn/music/photo_new/T002R68x68M000${imgUrl}.jpg?max_age=2592000" alt="The Album">
                 </span>
                 <h6 class="main_tit">${zhida.albumname}</h6>
                 <p class="sub_tit">${zhida.singername}</p>
-            </li>
+            </a>
             `
         }
     }
@@ -138,11 +138,11 @@ class Search {
         zhida.type === 0 ? topHtml = '' : topHtml = this.renderSinger(zhida);
         let songs = data.song.list
         let html = songs.map(song => `
-    <li data-limit="" data-songmid="001FL0V21f8blE">
+    <a  href="#player?artist=${song.singer.map(s => s.name).join(' / ')}&songmid=${song.songmid}&songid=${song.songid}&songname=${song.songname}&albummid=${song.albummid}&duration=${song.interval}">
             <i class="icon"></i>
             <h6 class="main_tit">${song.songname}</h6>
             <p class="sub_tit">${song.singer.map(s => s.name).join(' / ')}</p>
-    </li>`).join('');
+    </a>`).join('');
         this.$songsList.innerHTML += topHtml + html;
         // this.$songsList.insertAdjacentHTML('beforend', html);
     }

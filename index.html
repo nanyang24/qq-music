@@ -41,14 +41,15 @@
 <body>
     <header id="header">
         <img id="logo" src="./images/logo.png" alt="logo">
+        <a href="javascript:;" class="btn_download" id="show_player">播放器</a>
     </header>
-    <nav class="nav">
+    <nav id="nav">
         <a href="javascript:;" data-tab=".rec-tab" class="active">推荐</a>
         <a href="javascript:;" data-tab=".rank-tab">排行榜</a>
         <a href="javascript:;" data-tab=".search-tab">搜索</a>
     </nav>
-    <div class="content">
-        <div class="rec-tab ">
+    <div id="content">
+        <div class="rec-tab active">
             <div class="swiper-container"></div>
             <div class="radio-list">
                 <h2 class="title">电台</h2>
@@ -59,10 +60,10 @@
                 <ul class="list-ct"></ul>
             </div>
         </div>
-        <div class="rank-tab ">
+        <div class="rank-tab">
             <ul></ul>
         </div>
-        <div class="search-tab active">
+        <div class="search-tab">
             <div class="search-bar">
                 <div class="search-wrap">
                     <form action="#" class="search-form" autocomplete="off">
@@ -94,11 +95,33 @@
             <p id="load-complete" class="load-complete">已加载全部</p>
         </div>
     </div>
+    <div id="player" >
+        <div class="player-container">
+            <div class="player-header">
+                <img src="" alt="" class="album-cover">
+                <div class="song-info">
+                    <div class="song-name"></div>
+                    <div class="song-artist"></div>
+                </div>
+                <span class="icon-action icon-play"></span>
+            </div>
+            <div class="player-lyrics"></div>
+            <div class="player-footer">
+                <div class="icon-list"></div>
+                <div class="progress"></div>
+                <div class="action">
+                    <a href="#" class="btn-download">下载这首歌</a>
+                </div>
+            </div>
+        </div>
+        <div class="player-background"></div>
+    </div>
     <script src="scripts/swiper.min.js"></script>
     <script src="scripts/lazyload.js"></script>
     <script src="scripts/tab.js"></script>
     <script src="scripts/slide.js"></script>
     <script src="scripts/search.js "></script>
+    <script src="scripts/player.js "></script>
     <script src="scripts/app.js"></script>
 
 </body>

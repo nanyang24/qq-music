@@ -1,5 +1,5 @@
 (function () {
-    let nav = document.querySelector('.nav')
+    let nav = document.querySelector('#nav')
 
     nav.addEventListener('click', function (e) {
         let target = e.target;
