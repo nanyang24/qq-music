@@ -5,13 +5,17 @@
     display: block;
     float: left;
     height: $logo-height;
+    width: 90px;
     margin: 9px 0 0 10px;
+    background: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
   }
   .btn_download {
     float: right;
     height: 25px;
     line-height: 25px;
-    margin: 9px 10px 0 0;
+    margin: 10px 10px 0 0;
     padding: 0 12px;
     font-size: 14px;
     font-weight: 400;

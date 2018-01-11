@@ -1,4 +1,4 @@
-function lazyload(imagesNodeList) {
+export function lazyload(imagesNodeList) {
     let images = Array.prototype.slice.call(imagesNodeList);
 
     if ('IntersectionObserver' in window) {

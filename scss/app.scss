@@ -10,7 +10,12 @@
 @import "footer";
 @import "search";
 @import "player";
+@import 'swiper.min.css';
 
 body {
   background: $body-bg;
+}
+
+.noscroll {
+  overflow: hidden;
 }

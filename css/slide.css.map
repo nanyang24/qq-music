@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,iBAAkB,CAChB,KAAK,CAAE,IAAI,CAET,8DAA0B,CACxB,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,CACX,OAAO,CAAE,YAAY,CACrB,aAAa,CAAE,IAAI,CACnB,UAAU,CAAE,IAAI,CAChB,OAAO,CAAE,EAAE,CAEb,qEAAiC,CAC/B,OAAO,CAAE,CAAC,CACV,UAAU,CAAE,IAAI",
-"sources": ["../scss/slide.scss"],
-"names": [],
-"file": "slide.css"
-}

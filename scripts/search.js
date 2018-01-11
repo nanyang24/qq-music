@@ -1,4 +1,7 @@
-class Search {
+import {SEARCH_URL, HOTKEY_URL} from "./url";
+import {searchUrl, avatarUrl, albumUrl} from "./help";
+
+export class Search {
     constructor(el) {
         this.$el = el;
         this.keyword = '';  // 输入搜索的值
@@ -38,9 +41,8 @@ class Search {
     enter(event) {
         let keyword = event.target.value.trim();
         this.changeDelicon();
-        if (event.key !== 'Enter' || this.$input.value.length === 0) return;
+        if (event.keyCode !== 13 || this.$input.value.length === 0) return;
         if (!this.page || this.keyword === keyword) return
-
         this.addRecord(keyword);
         this.search(keyword);
     }
@@ -72,7 +74,7 @@ class Search {
         if (keyword !== this.keyword) this.reset();
         this.keyword = keyword;
         this.loadFlag(true);
-        fetch(`https://qq-music-api.now.sh/search?keyword=${this.keyword}&page=${page || this.page}`)
+        fetch(searchUrl(this.keyword, page))
             .then(res => res.json())
             .then(json => {
                 this.page = json.data.semantic.curpage;
@@ -107,7 +109,7 @@ class Search {
             return `
             <a data-singermid="${imgUrl}">
                 <span class="media avatar">
-                    <img src="https://y.gtimg.cn/music/photo_new/T001R68x68M000${imgUrl}.jpg?max_age=2592000" alt="${zhida.singername}">
+                    <img src=${avatarUrl(imgUrl)} alt="${zhida.singername}">
                 </span>
                 <h6 class="main_tit">${zhida.singername}</h6>
                 <p class="sub_tit"><span>单曲：${zhida.songnum}</span><span> 专辑：${zhida.albumnum}</span></p>
@@ -118,7 +120,7 @@ class Search {
             return `
             <a data-albummid=${imgUrl}>
                 <span class="media">
-                    <img src="https://y.gtimg.cn/music/photo_new/T002R68x68M000${imgUrl}.jpg?max_age=2592000" alt="The Album">
+                    <img src=${albumUrl(imgUrl)} alt="The Album">
                 </span>
                 <h6 class="main_tit">${zhida.albumname}</h6>
                 <p class="sub_tit">${zhida.singername}</p>
@@ -152,7 +154,7 @@ class Search {
      * @memberof Search
      */
     getHotkey() {
-        fetch('https://qq-music-api.now.sh/hotkey')
+        fetch(HOTKEY_URL)
             .then(res => res.json())
             .then(json => this.renderHotkey(json.data))
     }

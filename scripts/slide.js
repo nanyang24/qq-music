@@ -1,4 +1,6 @@
-class Slide {
+import Swiper from './swiper.min'
+
+export class Slide {
     constructor(option = {}) {
         this.$el = option.el;
         this.slide = option.slide;

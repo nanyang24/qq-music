@@ -42,5 +42,6 @@ app.get('/search', async (req, res) => {
 
 
 app.listen(PORT)
+
 console.log('进入 localhost:4001 ~ 查看数据')
 

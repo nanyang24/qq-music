@@ -86,8 +86,12 @@
     }
     .cancel-btn {
       display: none;
-      line-height: 38px;
-      padding: 0 4px 0 10px;
+      height: 36px;
+      line-height: 36px;
+      padding-right: 10px;
+      padding-left: 10px;
+      font-size: 14px;
+      color: #555;
     }
   }
   .search-result {

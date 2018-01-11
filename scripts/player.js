@@ -1,15 +1,29 @@
-class MusicPlayer {
+import {playerAlbumUrl, songUrl, lyricsUrl} from "./help";
+
+/**
+ * @description 音乐播放器界面
+ * @export
+ * @class MusicPlayer
+ */
+export class MusicPlayer {
     constructor(el) {
         this.$el = el;
         this.$el.addEventListener('click', this.clickHandle.bind(this));
         this.$audio = this.createAudio();
         this.lyrics = new Lyrics(this.$el.querySelector('.player-lyrics'), this.$audio);
-        this.progress = new ProgressBar(this.$el.querySelector('.progress'));
+        this.progress = new ProgressBar(this.$el.querySelector('.progress'), this.$audio);
         this.fetching = false;
     }
 
+    /**
+     * @description 创建 audio
+     * @returns HTMLAudioElement
+     * @memberof MusicPlayer
+     */
     createAudio() {
         let audio = document.createElement('audio');
+        // this.$source = document.createElement('source')
+        // audio.append(this.$source);
         audio.id = `player-${Math.floor(Math.random() * 100)}-${+new Date()}`;
         //播放结束的时候
         audio.addEventListener('ended', () => {
@@ -21,6 +35,11 @@ class MusicPlayer {
         return audio;
     }
 
+    /**
+     * @description 处理点击事件
+     * @param {any} event
+     * @memberof MusicPlayer
+     */
     clickHandle(event) {
         let target = event.target;
         switch (true) {
@@ -36,6 +55,11 @@ class MusicPlayer {
         }
     }
 
+    /**
+     * @description 显示 play 按钮
+     * @param {any} event
+     * @memberof MusicPlayer
+     */
     onPlay(event) {
         //如果正在 fetching 返回
         if (this.fetching) return
@@ -46,6 +70,11 @@ class MusicPlayer {
         event.target.classList.add('icon-pause');
     }
 
+    /**
+     * @description 显示暂停按钮
+     * @param {any} event
+     * @memberof MusicPlayer
+     */
     onPause() {
         this.$audio.pause()
         this.lyrics.pause()
@@ -54,21 +83,34 @@ class MusicPlayer {
         event.target.classList.add('icon-play');
     }
 
+    /**
+     * @description 播放
+     * @param {any} [options={}]
+     * @returns
+     * @memberof MusicPlayer
+     */
     play(options = {}) {
         if (!options) return;
         this.$el.querySelector('.song-name').innerText = options.songname;
         this.$el.querySelector('.song-artist').innerText = options.artist;
         this.progress.reset(options.duration);
+        let url = playerAlbumUrl(options.albummid);
 
-        let url = `https://y.gtimg.cn/music/photo_new/T002R150x150M000${options.albummid}.jpg`;
         this.$el.querySelector('.album-cover').src = url;
         this.$el.querySelector('.player-background').style.background = `url(${url})`;
-
+        this.$el.querySelector('.player-background').style.backgroundSize = `cover`;
+        this.$el.querySelector('.player-background').style.backgroundPosition = `bottom center`;
         if (options.songid) {
+            if (this.songid !== options.songid) {
+                this.$el.querySelector('.icon-action').className = 'icon-action icon-play';
+            }
             this.songid = options.songid;
-            this.$audio.src = `http://dl.stream.qqmusic.qq.com/C400${options.songmid}.m4a?fromtag=38&vkey=CA1B66F5E6D873B0FF3183D430C87C3E3A066D49133BB24A9B6F845F0CF13DA60807A28770161A8B06E78535415931C5A691223893A27824&guid=2638402844`;
+            // this.$audio.src = `http://dl.stream.qqmusic.qq.com/C400${options.songmid}.m4a?fromtag=38`;
+            // this.$audio.src = `http://dl.stream.qqmusic.qq.com/C400003jdNrv1YWLY3.m4a?fromtag=38&vkey=4C845C218B8389A1651B261E5E2F9B75B1D5FBFB06F9D11665AC899C4FA533EDB113CBBDA623DC1781F5BCCC0EE6F78A980D687E0DDD8200&guid=2638402844`;
+            this.$audio.src = songUrl(options.songmid);
+
             this.fetching = true;
-            fetch(`https://qq-music-api.now.sh/lyrics?id=${this.songid}`)
+            fetch(lyricsUrl(this.songid))
                 .then(res => res.json())
                 .then(json => json.lyric)
                 .then(text => this.lyrics.reset(text))
@@ -80,15 +122,30 @@ class MusicPlayer {
         this.show();
     }
 
+    /**
+     * @description 显示播放器
+     * @memberof MusicPlayer
+     */
     show() {
         this.$el.classList.add('show');
+        document.body.classList.add('noscroll')
     }
 
+    /**
+     * @description 隐藏播放器
+     * @memberof MusicPlayer
+     */
     hide() {
         this.$el.classList.remove('show');
+        document.body.classList.remove('noscroll')
     }
 }
 
+/**
+ * @description 歌词
+ * @export
+ * @class LyricsPlayer
+ */
 class Lyrics {
     constructor(el, audio) {
         this.$el = el;
@@ -108,6 +165,10 @@ class Lyrics {
         this.intervalId = setInterval(this.update.bind(this), 1000);
     }
 
+    /**
+     * @description 重新开始
+     * @memberof LyricsPlayer
+     */
     restart() {
         this.reset()
         this.start()
@@ -117,6 +178,11 @@ class Lyrics {
         clearInterval(this.intervalId)
     }
 
+    /**
+     * @description 重置
+     * @param {any} text
+     * @memberof LyricsPlayer
+     */
     reset(text) {
         this.pause();
         this.index = 0;
@@ -137,6 +203,10 @@ class Lyrics {
         }
     }
 
+    /**
+     * @description 渲染
+     * @memberof LyricsPlayer
+     */
     render() {
         let html = this.lyrics.map(line => `
           <div class="player-lyrics-line">${line.slice(10)}</div>
@@ -144,6 +214,10 @@ class Lyrics {
         this.$lines.innerHTML = html
     }
 
+    /**
+     * @description 更新歌词
+     * @memberof LyricsPlayer
+     */
     update() {
         this.elapsed = Math.round(this.$audio ? this.$audio.currentTime : this.elapsed + 1);
         if (this.index === this.lyrics.length - 1) return;
@@ -159,19 +233,28 @@ class Lyrics {
             }
         }
         //如果歌词页数大于2的话，歌词向上翻
-        if (this.index > 2) {
-            let topY = -(this.index - 2) * this.LINE_HEIGHT;
+        if (this.index > 3) {
+            let topY = -(this.index - 3) * this.LINE_HEIGHT;
             this.$lines.style.transform = `translateY(${topY}px)`
         }
-        console.log(this.index)
     }
 
+    //获取秒数
     getSeconds(line) {
         return +line.replace(/\[(\d{2})\:(\d{2}).*/, (match, p1, p2) =>
             (+p1) * 60 + (+p2)
         )
     }
 
+    /**
+     * @description 格式化文本 类似⬇️
+     * [xx:xx.xx]xxxxx
+     * [xx:xx.xx]xxxxx
+     * [xx:xx.xx]xxxxx
+     * @param {any} text
+     * @returns
+     * @memberof LyricsPlayer
+     */
     formatText(text) {   // 将歌词文本变正常
         let div = document.createElement('div');
         div.innerHTML = text;
@@ -179,13 +262,20 @@ class Lyrics {
     }
 }
 
+// 默认每条歌词的行高
 Lyrics.prototype.LINE_HEIGHT = 42
 
+/**
+ * @description 进度条
+ * @export
+ * @class Progress
+ */
 class ProgressBar {
-    constructor(el, duration, start) {
+    constructor(el, audio) {
         this.$el = el;
+        this.$audio = audio;
         this.elapsed = 0;
-        this.duration = duration || 0;
+        this.duration = 0;
         this.progress = 0;
         this.render();
         this.$progress = this.$el.querySelector('.progress-bar-progress');
@@ -193,20 +283,42 @@ class ProgressBar {
         this.$duration = this.$el.querySelector('.progress-duration');
         this.$elapsed.innerText = this.formatTime(this.elapsed);
         this.$duration.innerText = this.formatTime(this.duration);
-        if (start) this.start();
     }
 
+    /**
+     * @description 重新开始
+     * @memberof Progress
+     */
+    restart() {
+        this.reset();
+        this.start();
+    }
+
+    /**
+     * @description 开始
+     * @memberof Progress
+     */
     start() {
         this.pause()
         this.intervalId = setInterval(this.update.bind(this), 50)
     }
 
+    /**
+     * @description 清除计时器
+     * @memberof Progress
+     */
     pause() {
         clearInterval(this.intervalId)
     }
 
+    /**
+     * @description 更新时间
+     * @memberof Progress
+     */
     update() {
-        this.elapsed += 0.05
+        this.elapsed = Math.round(this.$audio ? this.$audio.currentTime : this.elapsed + 0.05);
+
+        // this.elapsed += 0.05
         // 如果当前时间大于总的持续时间的话就时间重置
         if (this.elapsed >= this.duration) this.reset()
         this.progress = this.elapsed / this.duration
@@ -214,6 +326,11 @@ class ProgressBar {
         this.$elapsed.innerText = this.formatTime(this.elapsed)
     }
 
+    /**
+     * @description 重置
+     * @param {any} duration
+     * @memberof Progress
+     */
     reset(duration) {
         this.pause()
         this.elapsed = 0
@@ -226,6 +343,10 @@ class ProgressBar {
         }
     }
 
+    /**
+     * @description 渲染
+     * @memberof Progress
+     */
     render() {
         this.$el.innerHTML = `
             <div class="progress-time progress-elapsed"></div>
@@ -236,6 +357,12 @@ class ProgressBar {
         `
     }
 
+    /**
+     * @description 格式化时间毫秒
+     * @param {any} seconds
+     * @returns 返回 05:10这种形式的时间
+     * @memberof Progress
+     */
     formatTime(seconds) {
         let mins = Math.floor(seconds / 60)
         let secs = Math.floor(seconds % 60)
