@@ -24,7 +24,7 @@ export class Search {
             this.$input.value = '';
             this.hide(this.$delBtn);
         });
-        this.$record.addEventListener('click', this.clickRecord.bind(this));
+        this.$el.addEventListener('click', this.clickRecord.bind(this));
         this.getHotkey();
 
         this.HISTORY_KEY = 'search_history';
@@ -191,9 +191,10 @@ export class Search {
             this.$el.querySelector('.search-record').innerHTML = '';
             this.searchRecord = [];
             localStorage.setItem(this.HISTORY_KEY, this.searchRecord);
-        } else {
+        } else if (target.matches('.record_con') || target.matches('.tag_s')) {
             let keyword = target.innerHTML;
             this.$input.value = keyword;
+            this.hide(document.querySelector('.search-result'));
             this.show(document.querySelector('.icon_delete'));
             this.search(keyword);
         }
